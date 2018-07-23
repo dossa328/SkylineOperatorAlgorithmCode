@@ -1,6 +1,5 @@
 # data set 만들기 [가격 , 해변으로부터의 거리]
-data_set = [[45, 90], [35, 92], [43, 90]]
-# [49, 8], [4, 61], [10, 22], [48, 51], [92, 5], [10, 40]]
+data_set = [[45, 90], [35, 92], [43, 90], [49, 8], [4, 61], [10, 22], [48, 51], [92, 5], [10, 40]]
 # 크기가 3인 window set 만들기
 data1 = [i for i in range(1)]
 # 크기가 ? 인 temp set 만들기
@@ -31,12 +30,12 @@ def dominated(looser, winner):
 for first_data in data_set:
     for second_data in data_set:
         if not dominated(first_data, second_data):
-            skyline.append(first_data)
+            if skyline.__contains__(first_data):
+                pass
+            else:
+                skyline.append(first_data)
         else:
             if skyline.__contains__(first_data):
-                delete = len(skyline)
-                for i in range(delete):
-                    skyline.remove(first_data)
+                skyline.remove(first_data)
                 break
-
 print(skyline)
