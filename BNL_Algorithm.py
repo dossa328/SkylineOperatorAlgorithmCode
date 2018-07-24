@@ -18,9 +18,7 @@ CountOut = 0
 for p_FirstData in data_set:
     # 각 S에 들어있는 p 마다 실행함
     for j in S_MainMemory:
-
-        R_OutputSkyline.append(dataOut)
-
+        R_OutputSkyline.append(j)
     p_FirstData.append(CountOut)
     CountIn = CountIn+1
 
@@ -28,7 +26,11 @@ for p_FirstData in data_set:
         if p_FirstData == q_SecondData:
             break
         # p가 q에 의해 dominated 되면 release(p) and break
+
+
         # p가 q를 dominate 하면 release(q)
+
+
     # main memory 가 3이 아니라면 실행
     if not len(S_MainMemory) >= 3:
         # temp 에 p 넣기
@@ -36,8 +38,13 @@ for p_FirstData in data_set:
         # CountOut +1
         CountOut = CountOut + 1
     # EOF일때. 마지막으로 받은데이터가 data_set의 마지막요소와 같을때
-    if q_SecondData == data_set[-1]
-        # 메인메모리에다가 Temp 를 넣고
+    if q_SecondData == data_set[-1]:
+        # Input memory에 Temp 를 넣고
         M_InputSkyline.append(T_TemporaryFile)
         # Temp 비우기
         T_TemporaryFile = []
+# 각 S에 들어있는 p를 R에 대입하고 release p
+
+# R 출력.
+
+# 끝
