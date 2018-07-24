@@ -21,16 +21,28 @@ def dominated(looser, winner):
 
     return False
 
+# 1개 data set 을 입력받음 -> first_data
+# 자신을 포함한 data 를 입력 받음 -> second_data
+# first_data 와 second_data를 비교함
+
 
 for first_data in data_set:
     for second_data in data_set:
+        # 만약 first_data가 second_data에 의해 dominated 되지 않는다면..
         if not dominated(first_data, second_data):
+            # skyline list 내에 first data가 존재한다면 pass
             if skyline.__contains__(first_data):
                 pass
+            # 아니라면 skyline list에 first_data를 append
             else:
                 skyline.append(first_data)
+        # 그 외의 상황이라면
         else:
+            # skyline list 내에 first data가 존재한다면
             if skyline.__contains__(first_data):
+                # skyline list 내에 들어있는 first_data를 삭제, 이 데이터는 skyline set이 될수 없기 때문
                 skyline.remove(first_data)
+                # 이후 break한 후 다음 데이터(first_data)로 넘어간다.
                 break
+
 print(skyline)
