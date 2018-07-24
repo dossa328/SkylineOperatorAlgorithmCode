@@ -1,13 +1,8 @@
+# 가장 기초적인 Skyline set 구하기
 # data set 만들기 [가격 , 해변으로부터의 거리]
 data_set = [[45, 90], [35, 92], [43, 90], [49, 8], [4, 61], [10, 22], [48, 51], [92, 5], [10, 40]]
-# 크기가 3인 window set 만들기
-data1 = [i for i in range(1)]
-# 크기가 ? 인 temp set 만들기
 first_data = [0]
 second_data = [0]
-temp = [0]
-ck = 0
-dom = []
 skyline = []
 
 
