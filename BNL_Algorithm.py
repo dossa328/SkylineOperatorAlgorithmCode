@@ -100,6 +100,7 @@ while True:
 for p_FirstData in S_MainMemory:
     R_OutputSkyline.append(p_FirstData[0])
 # R 출력.
+
 for p_FirstData in R_OutputSkyline:
     print(p_FirstData)
 # 끝
