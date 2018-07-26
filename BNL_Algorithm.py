@@ -1,3 +1,9 @@
+'''
+M_InputSkyline = [[39, 15], [47, 41], [82, 46], [51, 34], [65, 83], [98, 92], [75, 75], [60, 26], [22, 17], [15, 42],
+                  [18, 14], [14, 32], [11, 36], [40, 90], [49, 91], [30, 35], [93, 15], [35, 89], [35, 62], [49, 20],
+                  [25, 42], [89, 89], [84, 30], [79, 96], [98, 54], [13, 50], [17, 93], [83, 21], [96, 55], [45, 51],
+                  [1, 56], [7, 5], [1, 84], [25, 9], [6, 95]]
+'''
 # data set 만들기 [가격 , 해변으로부터의 거리]
 
 # 크기가 ? 인 temp set 만들기
@@ -14,6 +20,8 @@ skyline = []
 CountIn = 0
 CountOut = 0
 limit = 3
+leng = 0
+
 
 def dominated(looser, winner):
     dim = len(looser[0])
@@ -34,13 +42,19 @@ def dominated(looser, winner):
 # while not EOF(M) do begin
 while True:
     p_FirstData1 = []
-    q_SecondData1 = []
     if M_InputSkyline:
         # 각 S에 들어있는 p 마다 실행함
-        for p_FirstData in S_MainMemory:
-            if p_FirstData[1] == CountIn:
-                R_OutputSkyline.append(p_FirstData)
-                p_FirstData.clear()
+
+        leng = len(S_MainMemory)
+        removeElem = []
+
+        for i in range(leng):
+            if S_MainMemory[i][1] == CountIn:
+                R_OutputSkyline.append(S_MainMemory[i][0])
+                removeElem.append(S_MainMemory[i])
+
+        for elem in removeElem:
+            S_MainMemory.remove(elem)
 
         # load(M,p)
         p_FirstData1.append(M_InputSkyline[0])
@@ -67,14 +81,15 @@ while True:
         if not len(S_MainMemory) < limit:
             # temp 에 p 넣기
             T_TemporaryFile.append(p_FirstData1)
-            #S_MainMemory.remove(p_FirstData1)
+            S_MainMemory.remove(p_FirstData1)
             # CountOut +1
             CountOut = CountOut + 1
         # EOF일때. 마지막으로 받은데이터가 data_set의 마지막요소와 같을때
         if not M_InputSkyline:
             M_InputSkyline = []
             # Input memory에 Temp 를 넣고
-            M_InputSkyline = T_TemporaryFile
+            for i in range(len(T_TemporaryFile)):
+                M_InputSkyline.append(T_TemporaryFile[i][0])
             # Temp 비우기
             T_TemporaryFile.clear()
             CountIn = 0
@@ -83,9 +98,8 @@ while True:
         break
     # 각 S에 들어있는 p를 R에 대입하고 release p
 for p_FirstData in S_MainMemory:
-    R_OutputSkyline.append(p_FirstData)
+    R_OutputSkyline.append(p_FirstData[0])
 # R 출력.
 for p_FirstData in R_OutputSkyline:
-    print(p_FirstData[0])
+    print(p_FirstData)
 # 끝
-
