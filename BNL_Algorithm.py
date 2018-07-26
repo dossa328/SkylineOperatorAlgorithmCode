@@ -13,7 +13,7 @@ R_OutputSkyline = []
 skyline = []
 CountIn = 0
 CountOut = 0
-
+limit = 3
 
 def dominated(looser, winner):
     dim = len(looser[0])
@@ -55,6 +55,7 @@ while True:
             else:
                 # p가 q에 의해 dominated 되면 release(p) and break
                 if dominated(p_FirstData1, q_SecondData):
+                    S_MainMemory.remove(p_FirstData1)
                     p_FirstData1 = []
                     break
                 # q가 p에 의해 dominated 되면 release(q)
@@ -63,10 +64,10 @@ while True:
                     q_SecondData = []
 
         # main memory 가 3이 아니라면 실행
-        if not len(S_MainMemory) < 3:
+        if not len(S_MainMemory) < limit:
             # temp 에 p 넣기
             T_TemporaryFile.append(p_FirstData1)
-            S_MainMemory.remove(p_FirstData1)
+            #S_MainMemory.remove(p_FirstData1)
             # CountOut +1
             CountOut = CountOut + 1
         # EOF일때. 마지막으로 받은데이터가 data_set의 마지막요소와 같을때
