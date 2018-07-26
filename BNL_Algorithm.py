@@ -1,14 +1,13 @@
 # data set 만들기 [가격 , 해변으로부터의 거리]
-database = [[45, 90], [35, 92], [43, 90], [49, 8], [4, 61], [10, 22], [48, 51], [92, 5], [10, 40]]
-# 크기가 3인 window set 만들기
-window_set = [i for i in range(3)]
+
 # 크기가 ? 인 temp set 만들기
 T_TemporaryFile = []
 # main memory; a set of d-dimensional points
 S_MainMemory = []
 # output of the Skyline operation; a set of d-dimensional points
-#M_InputSkyline = [[45, 90], [35, 92], [43, 90], [49, 8], [4, 61], [10, 22], [48, 51], [92, 5], [10, 40]]
-M_InputSkyline = [[1, 8], [2, 7], [3, 6], [1.5, 6]]
+
+M_InputSkyline = [[45, 90], [35, 92], [43, 90], [49, 8], [4, 61], [10, 22], [48, 51], [92, 5], [10, 40]]
+#M_InputSkyline = [[1, 8], [2, 7], [3, 6], [1.5, 6]]
 # input of the Skyline operation; a set of d-dimensional points
 R_OutputSkyline = []
 skyline = []
@@ -32,7 +31,7 @@ def dominated(looser, winner):
     return False
 
 
- # while not EOF(M) do begin
+# while not EOF(M) do begin
 while True:
     p_FirstData1 = []
     q_SecondData1 = []
@@ -58,8 +57,8 @@ while True:
                 if dominated(p_FirstData1, q_SecondData):
                     p_FirstData1 = []
                     break
-                # p가 q를 dominate 하면 release(q)
-                elif not dominated(p_FirstData1, q_SecondData):
+                # q가 p에 의해 dominated 되면 release(q)
+                elif dominated(q_SecondData, p_FirstData1):
                     S_MainMemory.remove(q_SecondData)
                     q_SecondData = []
 
@@ -71,9 +70,10 @@ while True:
             # CountOut +1
             CountOut = CountOut + 1
         # EOF일때. 마지막으로 받은데이터가 data_set의 마지막요소와 같을때
-        if q_SecondData == database[-1]:
+        if not M_InputSkyline:
+            M_InputSkyline = []
             # Input memory에 Temp 를 넣고
-            M_InputSkyline.append(T_TemporaryFile)
+            M_InputSkyline = T_TemporaryFile
             # Temp 비우기
             T_TemporaryFile.clear()
             CountIn = 0
@@ -84,5 +84,7 @@ while True:
 for p_FirstData in S_MainMemory:
     R_OutputSkyline.append(p_FirstData)
 # R 출력.
-print(R_OutputSkyline)
+for p_FirstData in R_OutputSkyline:
+    print(p_FirstData[0])
 # 끝
+
